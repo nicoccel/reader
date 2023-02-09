@@ -47,6 +47,7 @@ while esecuzione_program == True:
             time.sleep(2)
             sys.exit()
     cancellaconsole.clearConsole()
+    
     if accettazione_credenziali == True:
         esecuzione_profilo = True
         while esecuzione_profilo == True:
@@ -55,12 +56,12 @@ while esecuzione_program == True:
                 case "6":
                     utente_activ.mostradati_utente()
                 case "1":
-                    libreria.append(libro.libro(libro.nuovolibro()))
+                    libreria.append(libro.libro(libro.nuovolibro(utente_activ.nome)))
                     print()
                 case "2":
-                    libreria = libro.toglilibro(libreria)
+                    libreria = libro.toglilibro(libreria,utente_activ.nome)
                 case "3":
-                    libreria = libro.modificalibro(libreria)
+                    libreria = libro.modificalibro(libreria, utente_activ.nome)
                 case "4":
                     for obj in libreria:
                         obj.mostralibro()

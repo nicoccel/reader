@@ -1,9 +1,33 @@
 import os
 import time
+import cancellaconsole
 
-def nuovolibro():
+def filelibronuovo(nomem,num,n):
+    dir = os.getcwd()
+    lib = "libreria"
+    try:
+        if not os.path.exists(n):
+            os.makedirs(f"{dir}\\{lib}\\{n}")
+    except:
+        print()
+    f = open(f"{dir}\\{lib}\\{n}\\{nomem}.txt", "w")
+    f.write(f"{nomem}||{num}")
+    f.close()
+
+def filelibrotogli(n,nn):
+    os.remove(os.getcwd()+"\\libreria\\"+nn+"\\"+n+".txt")
+
+
+def filelibromodifica(n,nn):
+    print()
+
+def nuovolibro(nomem):
+    path = "libreria"
+    if not os.path.exists(path):
+        os.makedirs(path)
     ok = False
     while ok == False:
+        cancellaconsole.clearConsole()
         print("inserisci il nome del libro \ manga \ fumetto \ qualsiasi cosa sia")
         nome = input()
         print("inserisci il numero del volume o premi x se è un volume unico")
@@ -16,6 +40,7 @@ def nuovolibro():
         conferma = input()
         if conferma == "":
             ok = True
+            filelibronuovo(nome,numero,nomem)
     return nome, numero
 
 def visual_ind(lib):
@@ -27,35 +52,44 @@ def visual_ind(lib):
     
 
 
-def toglilibro(lib):
+def toglilibro(lib,nn):
     ok = False
     while ok == False:
+        cancellaconsole.clearConsole()
         i = visual_ind(lib)
-        print("inserisci l'indice del libro da togliere")
-        try:
-            ind = int(input())
-            if ind == 0 or ind < i:
-                lib.pop(ind)
-                ok = True
-                print("rimozione avvenuta con successo")
-                time.sleep(1)
-            else:
-                print("indice non trovato\nriprovare premendo invio\nuscire premendo un tasto")
-                ritenta = input()
-                if ritenta != "":
+        if i != False:
+            print("inserisci l'indice del libro da togliere")
+            try:
+                ind = int(input())
+                if ind == 0 or ind < i:
+                    n = lib[ind].nome
+                    lib.pop(ind)
                     ok = True
-        except:
-            print("errore valore inserito, riprovare o uscire premendo x\naltrimenti premi invio o un altro tasto")
-            usc = input()
-            if usc == "x":
-                ok = True
+                    print("rimozione avvenuta con successo")
+                    time.sleep(1)
+                    filelibrotogli(n,nn)
+                else:
+                    print("indice non trovato\nriprovare premendo invio\nuscire premendo un tasto")
+                    ritenta = input()
+                    if ritenta != "":
+                        ok = True
+            except:
+                print("errore valore inserito, riprovare o uscire premendo x\naltrimenti premi invio o un altro tasto")
+                usc = input()
+                if usc == "x":
+                    ok = True
+        else:
+            print("non hai elementi nella tua libreria")
+            time.sleep(1) 
+            ok = True
 
     return lib
 
 
-def modificalibro(lib):
+def modificalibro(lib, n):
     ok = False
     while ok == False:
+        cancellaconsole.clearConsole()
         i = visual_ind(lib)
         print("inserisci l'indice del libro da modificare")
         try:
@@ -73,6 +107,7 @@ def modificalibro(lib):
                 ok = True
                 print("modifica avvenuta con successo")
                 time.sleep(1)
+                filelibromodifica(n, nom, indi)
             else:
                 print("indice non trovato\nriprovare premendo invio\nuscire premendo un tasto")
                 ritenta = input()

@@ -25,7 +25,7 @@ class utente():
         + f"\nmail {self.mail}"
         + f"\npassword privata")
         print(self.password)
-        print("premi invio per continuare")
+        print("premi inviob o un'altro tasto per continuare")
         invio = input()
 
     def modifica_impostazioni(self):
@@ -39,9 +39,9 @@ class utente():
             case "1":
                 self.cambio_password()
             case "2":
-                print()
+                self.cambio_mail()
             case "3":
-                print()
+                self.cambio_nomeutente()
 
     def cambio_password(self):
         cancellaconsole.clearConsole()
@@ -67,7 +67,6 @@ class utente():
                     ok = True
 
     def cambio_mail(self):
-        cancellaconsole.clearConsole()
         ok = False
         while ok == False:
             cancellaconsole.clearConsole()
@@ -81,10 +80,32 @@ class utente():
                 ok = True
                 time.sleep(1)
             else:
-                print("le mail non corrispondono\nreinserire o premere invio")
-                print("premi un tasto per uscire altrimenti")
+                print("le mail non corrispondono\nreinserire premendo invio")
+                print("altrimenti premi un tasto per uscire")
                 az = input()
                 if az != "":
                     print("cambio mail anullato")
+                    time.sleep(1)
+                    ok = True
+
+    def cambio_nomeutente(self):
+        ok = False
+        while ok == False:
+            cancellaconsole.clearConsole()
+            print("inserisci il nuovo nome utente")
+            nome = input()
+            print("reinscerisci il nuovo nome")
+            nomerein = input()
+            if nome == nomerein:
+                self.nome = nome
+                ok = True
+                print("cambio nome avvenuto con successo")
+                time.sleep(1)
+            else:
+                print("errore inserimento \nreinserire premendo invio")
+                print("altrimenti premi un tasto per uscire")
+                az = input()
+                if az != "":
+                    print("cambio nome anullato")
                     time.sleep(1)
                     ok = True
